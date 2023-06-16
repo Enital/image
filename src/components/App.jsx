@@ -1,16 +1,22 @@
+import { useState } from "react";
+
+import SearchBar from "./SearchBar/SearchBar";
+// import SearchText from "./SearchText/SearchText";
+
 export const App = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchText, setSearchText] = useState('');
+
+  const submitForm = (query) => {
+    if (query !== searchQuery) {
+      setSearchQuery(query);
+    }
+  }
+  
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <SearchBar onFormSubmit={submitForm}/>
+      {/* {searchQuery&&<SearchText searchText={searchQuery} />} */}
     </div>
   );
 };
