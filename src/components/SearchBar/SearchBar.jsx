@@ -3,8 +3,9 @@ import { FcSearch } from "react-icons/fc";
 
 import css from './searchBar.module.css'
 
-export default function SearchBar({ onFormSubmit }) {
+export default function SearchBar({ query, onFormSubmit }) {
     const [text, setText] = useState('');
+    const [showContent, setShowContent] = useState(false);
 
     const handleChange = event => {
         setText(event.target.value);
@@ -12,9 +13,9 @@ export default function SearchBar({ onFormSubmit }) {
 
     const formSubmit = (e) => {
         e.preventDefault();
+        setShowContent(true);
         onFormSubmit(text);
         setText('');
-
     }
 
     return (
@@ -36,9 +37,8 @@ export default function SearchBar({ onFormSubmit }) {
                         onChange={handleChange}
                     />
                 </form>
-                <p className={css.text}>Search item is: {text}</p>
-            </header>
-            
+                {showContent && <p className={css.text}>Search item: {query}</p>}
+            </header>           
         </>
     )
 };
